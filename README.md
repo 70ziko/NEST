@@ -10,7 +10,6 @@ This project implements a custom file format called NestedImage (.nest), which a
 - Efficient tiling system for large image handling
 - Read and write operations for .nest files
 - Sample data generation for testing purposes
-- Written in Go with a focus on SOLID principles and object-oriented design
 
 ## Installation
 

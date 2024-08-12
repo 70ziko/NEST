@@ -10,8 +10,6 @@ import (
     "time"
 )
 
-// Interfaces
-
 type ImageWriter interface {
     Write(writer io.Writer) error
 }
@@ -19,8 +17,6 @@ type ImageWriter interface {
 type ImageReader interface {
     Read(reader io.Reader) error
 }
-
-// Structs
 
 type FileHeader struct {
     Magic       [4]byte
@@ -52,11 +48,7 @@ type NestedImageFile struct {
     NestedImages []NestedImage
 }
 
-// Constants
-
 const MAGIC = "NEST"
-
-// NestedImageFile methods
 
 func (nif *NestedImageFile) Write(writer io.Writer) error {
     if err := binary.Write(writer, binary.LittleEndian, &nif.Header); err != nil {
@@ -134,8 +126,6 @@ func (nif *NestedImageFile) fillTile(tile []PixeLink, x, y, tileSize int) {
     }
 }
 
-// NestedImage methods
-
 func (ni *NestedImage) Write(writer io.Writer) error {
     if err := binary.Write(writer, binary.LittleEndian, ni.Width); err != nil {
         return fmt.Errorf("failed to write nested image width: %w", err)
@@ -162,8 +152,6 @@ func (ni *NestedImage) Read(reader io.Reader) error {
     }
     return nil
 }
-
-// File operations
 
 func WriteNestedImageFile(filename string, nif *NestedImageFile) error {
     file, err := os.Create(filename)
